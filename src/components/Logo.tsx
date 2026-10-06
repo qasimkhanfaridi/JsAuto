@@ -24,7 +24,7 @@ export const Logo: React.FC<LogoProps> = ({
     return (
       <div className={`relative inline-block ${className}`}>
         <img
-          src="/js-auto-official-logo.jpg"
+          src={`${import.meta.env.BASE_URL}js-auto-official-logo.jpg`}
           alt="JS Auto Official Logo"
           className={`${badgeClass} rounded-full object-cover shadow-md border-2 border-brand-500/30 hover:scale-105 transition-transform`}
         />
@@ -48,7 +48,7 @@ export const Logo: React.FC<LogoProps> = ({
       {/* Official Circular Badge Emblem */}
       <div className="relative shrink-0">
         <img
-          src="/js-auto-official-logo.jpg"
+          src={`${import.meta.env.BASE_URL}js-auto-official-logo.jpg`}
           alt="JS Auto Official Emblem"
           className={`${avatarClass} rounded-full object-cover shadow-md ring-2 ring-brand-500/40 group-hover:ring-brand-400 group-hover:scale-105 transition-all`}
         />

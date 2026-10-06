@@ -118,7 +118,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 <div className="flex items-center space-x-3.5 pb-2">
                   <img
-                    src="/js-auto-official-logo.jpg"
+                    src={`${import.meta.env.BASE_URL}js-auto-official-logo.jpg`}
                     alt="JS Auto Official Logo"
                     className="w-14 h-14 rounded-full object-cover shadow-md ring-2 ring-brand-100 shrink-0"
                   />

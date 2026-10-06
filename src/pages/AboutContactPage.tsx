@@ -63,7 +63,7 @@ export const AboutContactPage: React.FC = () => {
           <div className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-xs space-y-6">
             <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-5 pb-6 border-b border-slate-100 text-center sm:text-left">
               <img
-                src="/js-auto-official-logo.jpg"
+                src={`${import.meta.env.BASE_URL}js-auto-official-logo.jpg`}
                 alt="JS Auto Official Logo"
                 className="w-24 h-24 rounded-full object-cover shadow-lg ring-4 ring-brand-100 shrink-0"
               />
