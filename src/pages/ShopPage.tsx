@@ -40,7 +40,12 @@ export const ShopPage: React.FC<ShopPageProps> = ({
         return false;
       }
 
-      // 2. Brand
+      // 2. Condition (Brand New vs Japanese Kabli)
+      if (filters.conditionFilter !== 'all' && p.condition !== filters.conditionFilter) {
+        return false;
+      }
+
+      // 3. Brand
       if (
         filters.selectedBrands.length > 0 &&
         !filters.selectedBrands.includes(p.brand)
@@ -48,29 +53,30 @@ export const ShopPage: React.FC<ShopPageProps> = ({
         return false;
       }
 
-      // 3. Search query
+      // 4. Search query
       if (filters.searchQuery.trim()) {
         const query = filters.searchQuery.toLowerCase();
         const matchesName = p.name.toLowerCase().includes(query);
         const matchesBrand = p.brand.toLowerCase().includes(query);
         const matchesDesc = p.shortDescription.toLowerCase().includes(query);
         const matchesTags = p.tags.some((t) => t.toLowerCase().includes(query));
-        if (!matchesName && !matchesBrand && !matchesDesc && !matchesTags) {
+        const matchesCompat = p.compatibility?.some((c) => c.toLowerCase().includes(query));
+        if (!matchesName && !matchesBrand && !matchesDesc && !matchesTags && !matchesCompat) {
           return false;
         }
       }
 
-      // 4. In stock
+      // 5. In stock
       if (filters.inStockOnly && !p.inStock) {
         return false;
       }
 
-      // 5. Selected Tag
+      // 6. Selected Tag
       if (filters.selectedTag && !p.tags.includes(filters.selectedTag)) {
         return false;
       }
 
-      // 6. Price range (check if any variant falls in range)
+      // 7. Price range (check if any variant falls in range)
       const minVariantPrice = Math.min(...p.variants.map((v) => v.price));
       if (minVariantPrice < filters.minPrice || minVariantPrice > filters.maxPrice) {
         return false;
@@ -109,9 +115,10 @@ export const ShopPage: React.FC<ShopPageProps> = ({
     setFilters({
       searchQuery: '',
       category: 'all',
+      conditionFilter: 'all',
       selectedBrands: [],
       minPrice: 0,
-      maxPrice: 20000,
+      maxPrice: 350000,
       inStockOnly: false,
       selectedTag: null,
       sortBy: 'featured',
@@ -132,7 +139,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({
             </span>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            Genuine engine lubricants, coolants, filters, and WD-40 sprays available for instant delivery.
+            Brand New OEM & Japanese Kabli (Qabli) Parts: Engines, Gearboxes, Shocks, Brakes, Lights & Maintenance Fluids.
           </p>
         </div>
 
@@ -174,12 +181,29 @@ export const ShopPage: React.FC<ShopPageProps> = ({
 
       {/* Active Filter Chips */}
       {(filters.category !== 'all' ||
+        filters.conditionFilter !== 'all' ||
         filters.selectedBrands.length > 0 ||
         filters.searchQuery ||
         filters.selectedTag ||
         filters.inStockOnly) && (
         <div className="flex flex-wrap items-center gap-2 py-3 border-b border-slate-100 text-xs">
           <span className="text-slate-400 font-medium">Active filters:</span>
+
+          {filters.conditionFilter !== 'all' && (
+            <span className={`inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg border font-bold ${
+              filters.conditionFilter === 'kabli'
+                ? 'bg-purple-50 text-purple-700 border-purple-200'
+                : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+            }`}>
+              <span>Condition: {filters.conditionFilter === 'kabli' ? 'Japanese Kabli (Qabli)' : 'Brand New'}</span>
+              <button
+                type="button"
+                onClick={() => setFilters((p) => ({ ...p, conditionFilter: 'all' }))}
+              >
+                <X className="w-3 h-3 hover:opacity-75" />
+              </button>
+            </span>
+          )}
 
           {filters.category !== 'all' && (
             <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 border border-brand-200 font-medium">

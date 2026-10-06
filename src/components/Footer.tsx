@@ -54,46 +54,55 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <li>
                 <button
                   type="button"
+                  onClick={() => onNavigate('shop', 'kabli-parts')}
+                  className="hover:text-amber-400 text-amber-200 transition-colors font-semibold"
+                >
+                  🇯🇵 Japanese Kabli (Qabli) Parts
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('shop', 'new-spare-parts')}
+                  className="hover:text-emerald-400 text-emerald-200 transition-colors font-semibold"
+                >
+                  ✨ Brand New Spare Parts
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('shop', 'engine-mechanical')}
+                  className="hover:text-brand-400 transition-colors"
+                >
+                  Engines & Gearbox Assemblies
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('shop', 'suspension-brakes')}
+                  className="hover:text-brand-400 transition-colors"
+                >
+                  Suspension, Shocks & Brakes
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('shop', 'electrical-lights')}
+                  className="hover:text-brand-400 transition-colors"
+                >
+                  Auto Electricals, AC & Lights
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
                   onClick={() => onNavigate('shop', 'engine-oils')}
                   className="hover:text-brand-400 transition-colors"
                 >
-                  Engine Oils (Synthetic & Mineral)
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('shop', 'coolants')}
-                  className="hover:text-brand-400 transition-colors"
-                >
-                  Radiator Coolants & Flushes
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('shop', 'filters')}
-                  className="hover:text-brand-400 transition-colors"
-                >
-                  Air, Oil & Fuel Filters
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('shop', 'lubricants-sprays')}
-                  className="hover:text-brand-400 transition-colors"
-                >
-                  WD-40 & Specialty Sprays
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('shop', 'consumables')}
-                  className="hover:text-brand-400 transition-colors"
-                >
-                  Wiper Blades & Consumables
+                  100% Genuine Oils & Fluids
                 </button>
               </li>
               <li className="text-slate-500 flex items-center space-x-1.5">

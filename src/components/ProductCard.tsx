@@ -46,6 +46,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProdu
           category={product.category}
           brand={product.brand}
           name={product.name}
+          condition={product.condition}
           size="md"
         />
       </div>
@@ -53,24 +54,43 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProdu
       {/* Body Content */}
       <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
         <div>
-          {/* Brand & Rating Bar */}
+          {/* Brand & Condition Bar */}
           <div className="flex items-center justify-between text-xs mb-1.5">
-            <span className="font-semibold text-brand-600 uppercase tracking-wide">
-              {product.brand}
-            </span>
+            <div className="flex items-center space-x-1.5">
+              <span className="font-bold text-slate-700 uppercase tracking-wide">
+                {product.brand}
+              </span>
+              <span className="text-slate-300">•</span>
+              {product.condition === 'kabli' ? (
+                <span className="text-[10px] font-bold text-purple-700 bg-purple-50 px-1.5 py-0.2 rounded border border-purple-200">
+                  Kabli / Qabli
+                </span>
+              ) : (
+                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">
+                  Brand New
+                </span>
+              )}
+            </div>
             {product.rating && (
               <span className="flex items-center space-x-1 text-amber-500 font-medium">
                 <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                 <span>{product.rating.toFixed(1)}</span>
-                <span className="text-slate-400 text-[10px]">({product.reviewsCount})</span>
               </span>
             )}
           </div>
 
           {/* Product Title */}
-          <h3 className="font-semibold text-slate-800 text-sm sm:text-base line-clamp-2 leading-snug group-hover:text-brand-600 transition-colors">
+          <h3 className="font-bold text-slate-900 text-sm sm:text-base line-clamp-2 leading-snug group-hover:text-brand-600 transition-colors">
             {product.name}
           </h3>
+
+          {/* Car Compatibility Pills if available */}
+          {product.compatibility && product.compatibility.length > 0 && (
+            <div className="flex items-center space-x-1 text-[11px] text-slate-500 mt-1 line-clamp-1">
+              <span className="font-semibold text-slate-700">Fits:</span>
+              <span className="truncate">{product.compatibility.slice(0, 2).join(', ')}</span>
+            </div>
+          )}
 
           {/* Short description */}
           <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">

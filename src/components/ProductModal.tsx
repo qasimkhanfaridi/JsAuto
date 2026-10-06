@@ -80,11 +80,16 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
                 category={product.category}
                 brand={product.brand}
                 name={product.name}
+                condition={product.condition}
                 size="lg"
               />
               <div className="mt-3 flex items-center justify-center space-x-2 text-xs text-slate-500">
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                <span>100% Genuine Sealed Stock Guaranteed</span>
+                <span>
+                  {product.condition === 'kabli'
+                    ? 'Tested Genuine Japanese Kabli Part (Pre-inspected)'
+                    : '100% Brand New Genuine / OEM Part'}
+                </span>
               </div>
             </div>
 
@@ -92,15 +97,25 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
             <div className="space-y-4">
               <div>
                 <div className="flex items-center space-x-2">
-                  <span className="text-xs font-bold text-brand-600 uppercase tracking-wider">
+                  <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
                     {product.brand}
                   </span>
+                  <span className="text-slate-300">•</span>
+                  {product.condition === 'kabli' ? (
+                    <span className="text-xs font-extrabold text-purple-700 bg-purple-100 px-2 py-0.5 rounded-md border border-purple-200">
+                      Japanese Kabli (Qabli)
+                    </span>
+                  ) : (
+                    <span className="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md border border-emerald-200">
+                      Brand New
+                    </span>
+                  )}
                   <span className="text-slate-300">•</span>
                   <span className="text-xs font-medium text-slate-500 capitalize">
                     {product.subcategory || product.category.replace('-', ' ')}
                   </span>
                 </div>
-                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1 leading-snug">
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1.5 leading-snug">
                   {product.name}
                 </h2>
                 {product.rating && (
@@ -202,11 +217,28 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
           </div>
 
           {/* Description & Tags */}
-          <div className="border-t border-slate-100 pt-5 space-y-3">
-            <h4 className="text-sm font-bold text-slate-800">Product Details</h4>
+          <div className="space-y-3">
             <p className="text-sm text-slate-600 leading-relaxed">
               {product.shortDescription}
             </p>
+
+            {/* Vehicle Compatibility list */}
+            {product.compatibility && product.compatibility.length > 0 && (
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80 space-y-1.5">
+                <span className="text-xs font-bold text-slate-800 block">Verified Vehicle Compatibility:</span>
+                <div className="flex flex-wrap gap-1.5">
+                  {product.compatibility.map((model) => (
+                    <span
+                      key={model}
+                      className="px-2 py-0.5 rounded text-[11px] font-medium bg-white text-slate-700 border border-slate-200"
+                    >
+                      ✓ {model}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="flex flex-wrap gap-1.5">
               {product.tags.map((tag) => (
                 <span

@@ -7,15 +7,14 @@ import {
   MessageCircle,
   ArrowRight,
   ShieldCheck,
-  Truck,
   Star,
   CheckCircle2,
   Droplet,
-  Filter,
-  ThermometerSnowflake,
+  ChevronRight,
+  RotateCcw,
   Sparkles,
   Wrench,
-  ChevronRight
+  Search
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -32,16 +31,22 @@ export const HomePage: React.FC<HomePageProps> = ({
   onNavigateToAbout,
 }) => {
   const featuredProducts = products.filter((p) => p.featured).slice(0, 8);
+  const kabliHighlights = products.filter((p) => p.condition === 'kabli').slice(0, 4);
+  const newPartHighlights = products.filter((p) => p.condition === 'new' && p.category !== 'engine-oils').slice(0, 4);
 
   const openWhatsApp = () => {
     window.open(buildGeneralInquiryWhatsAppUrl(), '_blank', 'noopener,noreferrer');
+  };
+
+  const openPartInquiry = (partType: string) => {
+    const text = `Hello ${STORE_CONFIG.name}, I am looking for a spare part: ${partType}. My car make/model is: `;
+    window.open(`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
   };
 
   return (
     <div className="space-y-16 pb-16">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-sky-50 via-slate-50 to-white pt-10 pb-16 border-b border-slate-200/60">
-        {/* Subtle decorative background gradients */}
         <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 bg-brand-200/40 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 -mb-12 -ml-12 w-96 h-96 bg-sky-200/40 rounded-full blur-3xl pointer-events-none" />
 
@@ -49,18 +54,18 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-brand-100/80 border border-brand-200 text-brand-800 text-xs font-bold">
-                <span className="w-2 h-2 rounded-full bg-brand-600" />
-                <span>Rawalpindi & Islamabad's Genuine Auto Fluids Store</span>
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-brand-100/90 border border-brand-200 text-brand-900 text-xs font-bold">
+                <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
+                <span>{STORE_CONFIG.tagline}</span>
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.15]">
-                Premium Engine Oils, Filters & Lubricants.{' '}
-                <span className="text-brand-600 block mt-1">Direct to Your Doorstep.</span>
+                New OEM & Japanese Kabli (Qabli) Spare Parts.{' '}
+                <span className="text-brand-600 block mt-1">For All Makes & Models.</span>
               </h1>
 
               <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                Browse 100% genuine Japanese & European engine oils (Mobil 1, Shell, Castrol, Liqui Moly, Toyota OEM), genuine filters, and WD-40 sprays. Order instantly on WhatsApp without cumbersome sign-ups.
+                Looking for a low-mileage Japanese Kabli engine, automatic gearbox, or genuine LED headlamp? Or brand new KYB shocks, ceramic brake pads, and sealed lubricants? JS Auto supplies every mechanical and electrical automotive part in Rawalpindi, Islamabad & nationwide.
               </p>
 
               {/* CTAs */}
@@ -70,7 +75,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   onClick={() => onNavigateToShop('all')}
                   className="w-full sm:w-auto px-6 py-3.5 bg-brand-600 hover:bg-brand-700 text-white rounded-2xl font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center space-x-2 active:scale-95"
                 >
-                  <span>Explore 100+ Products</span>
+                  <span>Browse All Parts Catalog</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
@@ -80,7 +85,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   className="w-full sm:w-auto px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center space-x-2 active:scale-95"
                 >
                   <MessageCircle className="w-4 h-4 fill-white" />
-                  <span>Order Directly on WhatsApp</span>
+                  <span>Inquire Part on WhatsApp</span>
                 </button>
               </div>
 
@@ -88,11 +93,11 @@ export const HomePage: React.FC<HomePageProps> = ({
               <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs text-slate-600">
                 <div className="flex items-center space-x-1.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                  <span>100% Genuine Guaranteed</span>
+                  <span>Tested Japanese Kabli Cuts</span>
                 </div>
                 <div className="flex items-center space-x-1.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                  <span>Same-Day Twin Cities Dispatch</span>
+                  <span>Brand New OEM Replacement</span>
                 </div>
                 <div className="flex items-center space-x-1.5">
                   <div className="flex text-amber-400">
@@ -103,7 +108,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
             </div>
 
-            {/* Right Card: Quick Location & Feature Card */}
+            {/* Right Card: Verified Workshop & Storefront */}
             <div className="lg:col-span-5">
               <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-xl shadow-slate-200/50 space-y-5">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100">
@@ -138,11 +143,12 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 <div className="space-y-3">
                   <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs text-slate-600 space-y-1.5">
-                    <div className="font-bold text-slate-800">Verified Workshop & Parts Center:</div>
+                    <div className="font-bold text-slate-800">Complete Spare Parts Range:</div>
                     <ul className="space-y-1 text-[11px] text-slate-500 list-disc list-inside">
-                      <li>100% genuine sealed engine oils & OEM filters</li>
-                      <li>Diagnostic scan, auto electrician & mechanical repair</li>
-                      <li>Instant WhatsApp order confirmation ({STORE_CONFIG.phone})</li>
+                      <li><strong>Kabli Parts:</strong> Engines, Transmissions, Struts, Body cuts</li>
+                      <li><strong>New Spare Parts:</strong> Suspension, Brakes, Plugs, Pumps, Bumpers</li>
+                      <li><strong>Care & Fluids:</strong> 100% genuine sealed oils, coolants, WD-40</li>
+                      <li><strong>Hotlines:</strong> {STORE_CONFIG.phone}</li>
                     </ul>
                   </div>
                 </div>
@@ -153,7 +159,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     onClick={onNavigateToAbout}
                     className="py-2.5 px-3 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-semibold text-center transition-colors"
                   >
-                    View Map & Details
+                    Workshop Location
                   </button>
                   <button
                     type="button"
@@ -170,134 +176,238 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* Featured Categories Grid */}
+      {/* 4 Major Inventory Pillars */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex items-end justify-between mb-8">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-brand-600 block">
-              Categories
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
-              Browse by Department
-            </h2>
-          </div>
-          <button
-            type="button"
-            onClick={() => onNavigateToShop('all')}
-            className="text-xs sm:text-sm font-bold text-brand-600 hover:text-brand-800 flex items-center space-x-1"
-          >
-            <span>View All (100)</span>
-            <ChevronRight className="w-4 h-4" />
-          </button>
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <span className="text-xs font-bold uppercase tracking-wider text-brand-600 block">
+            Comprehensive Inventory
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+            Whatever Your Car Needs, We Have It
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500 mt-2">
+            Browse genuine imported Japanese cuts or factory-sealed new replacement parts with full quality guarantee.
+          </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-5">
-          {/* Category 1: Engine Oils */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {/* Pillar 1: Kabli / Qabli Parts */}
+          <div
+            onClick={() => onNavigateToShop('kabli-parts')}
+            className="group p-6 bg-gradient-to-br from-purple-50/50 to-white rounded-3xl border border-purple-100 shadow-2xs hover:shadow-md hover:border-purple-300 transition-all cursor-pointer flex flex-col justify-between"
+          >
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-purple-600 text-white flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
+                <RotateCcw className="w-6 h-6" />
+              </div>
+              <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md bg-purple-100 text-purple-800">
+                Low-Mileage Imports
+              </span>
+              <h3 className="font-extrabold text-slate-900 text-lg mt-2 group-hover:text-purple-700 transition-colors">
+                Japanese Kabli (Qabli) Parts
+              </h3>
+              <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                Tested Half & Full Engines (1NZ, 2NZ, R06A, L15), Automatic/CVT Transmissions, Original LED Headlights, Body Cuts & Alternators.
+              </p>
+            </div>
+            <div className="mt-5 pt-3 border-t border-purple-50 flex items-center justify-between text-xs font-bold text-purple-700 group-hover:underline">
+              <span>View Kabli Stock</span>
+              <ChevronRight className="w-4 h-4" />
+            </div>
+          </div>
+
+          {/* Pillar 2: Brand New Spare Parts */}
+          <div
+            onClick={() => onNavigateToShop('new-spare-parts')}
+            className="group p-6 bg-gradient-to-br from-emerald-50/50 to-white rounded-3xl border border-emerald-100 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all cursor-pointer flex flex-col justify-between"
+          >
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
+                <Sparkles className="w-6 h-6" />
+              </div>
+              <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md bg-emerald-100 text-emerald-800">
+                Factory Sealed & OEM
+              </span>
+              <h3 className="font-extrabold text-slate-900 text-lg mt-2 group-hover:text-emerald-700 transition-colors">
+                Brand New Spare Parts
+              </h3>
+              <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                KYB Shocks, 555 Ball Joints, Kashiyama Ceramic Brake Pads, Brembo Discs, Denso Iridium Plugs, Bumpers, and Side Mirrors.
+              </p>
+            </div>
+            <div className="mt-5 pt-3 border-t border-emerald-50 flex items-center justify-between text-xs font-bold text-emerald-700 group-hover:underline">
+              <span>View New Parts</span>
+              <ChevronRight className="w-4 h-4" />
+            </div>
+          </div>
+
+          {/* Pillar 3: Engine & Transmission */}
+          <div
+            onClick={() => onNavigateToShop('engine-mechanical')}
+            className="group p-6 bg-gradient-to-br from-sky-50/50 to-white rounded-3xl border border-sky-100 shadow-2xs hover:shadow-md hover:border-sky-300 transition-all cursor-pointer flex flex-col justify-between"
+          >
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-sky-600 text-white flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
+                <Wrench className="w-6 h-6" />
+              </div>
+              <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md bg-sky-100 text-sky-800">
+                Mechanical Core
+              </span>
+              <h3 className="font-extrabold text-slate-900 text-lg mt-2 group-hover:text-sky-700 transition-colors">
+                Engine & Transmission
+              </h3>
+              <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                Water pumps, starter motors, alternators, throttle bodies, steering racks, ABS modulators, and engine mounts.
+              </p>
+            </div>
+            <div className="mt-5 pt-3 border-t border-sky-50 flex items-center justify-between text-xs font-bold text-sky-700 group-hover:underline">
+              <span>View Mechanical</span>
+              <ChevronRight className="w-4 h-4" />
+            </div>
+          </div>
+
+          {/* Pillar 4: Fluids & Maintenance */}
           <div
             onClick={() => onNavigateToShop('engine-oils')}
-            className="group p-5 bg-white rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-brand-300 transition-all cursor-pointer flex flex-col justify-between"
+            className="group p-6 bg-gradient-to-br from-amber-50/50 to-white rounded-3xl border border-amber-100 shadow-2xs hover:shadow-md hover:border-amber-300 transition-all cursor-pointer flex flex-col justify-between"
           >
-            <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 mb-4 group-hover:scale-110 transition-transform">
-              <Droplet className="w-6 h-6" />
-            </div>
             <div>
-              <h3 className="font-bold text-slate-900 text-sm sm:text-base group-hover:text-brand-600 transition-colors">
-                Engine Oils
-              </h3>
-              <p className="text-xs text-slate-500 mt-1">32 Products</p>
-              <span className="inline-block mt-3 text-[11px] font-semibold text-brand-600 group-hover:underline">
-                Explore Oils →
+              <div className="w-12 h-12 rounded-2xl bg-amber-600 text-white flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
+                <Droplet className="w-6 h-6" />
+              </div>
+              <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md bg-amber-100 text-amber-800">
+                Fluids & Consumables
               </span>
-            </div>
-          </div>
-
-          {/* Category 2: Coolants */}
-          <div
-            onClick={() => onNavigateToShop('coolants')}
-            className="group p-5 bg-white rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-brand-300 transition-all cursor-pointer flex flex-col justify-between"
-          >
-            <div className="w-12 h-12 rounded-2xl bg-cyan-50 border border-cyan-100 flex items-center justify-center text-cyan-600 mb-4 group-hover:scale-110 transition-transform">
-              <ThermometerSnowflake className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="font-bold text-slate-900 text-sm sm:text-base group-hover:text-brand-600 transition-colors">
-                Engine Coolants
+              <h3 className="font-extrabold text-slate-900 text-lg mt-2 group-hover:text-amber-700 transition-colors">
+                Oils, Coolants & WD-40
               </h3>
-              <p className="text-xs text-slate-500 mt-1">16 Products</p>
-              <span className="inline-block mt-3 text-[11px] font-semibold text-brand-600 group-hover:underline">
-                Explore Coolants →
-              </span>
+              <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                100% genuine Mobil 1, Shell, Castrol, Liqui Moly, Toyota OEM oils, Prestone Coolants, OEM filters, and WD-40 sprays.
+              </p>
             </div>
-          </div>
-
-          {/* Category 3: Filters */}
-          <div
-            onClick={() => onNavigateToShop('filters')}
-            className="group p-5 bg-white rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-brand-300 transition-all cursor-pointer flex flex-col justify-between"
-          >
-            <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-4 group-hover:scale-110 transition-transform">
-              <Filter className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="font-bold text-slate-900 text-sm sm:text-base group-hover:text-brand-600 transition-colors">
-                Air & Oil Filters
-              </h3>
-              <p className="text-xs text-slate-500 mt-1">26 Products</p>
-              <span className="inline-block mt-3 text-[11px] font-semibold text-brand-600 group-hover:underline">
-                Explore Filters →
-              </span>
-            </div>
-          </div>
-
-          {/* Category 4: WD-40 & Sprays */}
-          <div
-            onClick={() => onNavigateToShop('lubricants-sprays')}
-            className="group p-5 bg-white rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-brand-300 transition-all cursor-pointer flex flex-col justify-between"
-          >
-            <div className="w-12 h-12 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-4 group-hover:scale-110 transition-transform">
-              <Sparkles className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="font-bold text-slate-900 text-sm sm:text-base group-hover:text-brand-600 transition-colors">
-                WD-40 & Sprays
-              </h3>
-              <p className="text-xs text-slate-500 mt-1">16 Products</p>
-              <span className="inline-block mt-3 text-[11px] font-semibold text-brand-600 group-hover:underline">
-                Explore Sprays →
-              </span>
-            </div>
-          </div>
-
-          {/* Category 5: Consumables & Wipers */}
-          <div
-            onClick={() => onNavigateToShop('consumables')}
-            className="group p-5 bg-white rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-brand-300 transition-all cursor-pointer flex flex-col justify-between"
-          >
-            <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 mb-4 group-hover:scale-110 transition-transform">
-              <Wrench className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="font-bold text-slate-900 text-sm sm:text-base group-hover:text-brand-600 transition-colors">
-                Wipers & Bulbs
-              </h3>
-              <p className="text-xs text-slate-500 mt-1">10 Products</p>
-              <span className="inline-block mt-3 text-[11px] font-semibold text-brand-600 group-hover:underline">
-                Explore Items →
-              </span>
+            <div className="mt-5 pt-3 border-t border-amber-50 flex items-center justify-between text-xs font-bold text-amber-700 group-hover:underline">
+              <span>View Fluids</span>
+              <ChevronRight className="w-4 h-4" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured / Best-Selling Products Grid */}
+      {/* WhatsApp Custom Sourcing Banner */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 rounded-3xl p-8 sm:p-10 text-white border border-slate-800 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center lg:text-left max-w-2xl">
+            <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">
+              <Search className="w-3.5 h-3.5" />
+              <span>Looking for a specific or rare part?</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-black tracking-tight">
+              Can't Find Your Part? Send Photo or Chassis Number!
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              We stock hundreds of Kabli body cuts, doors, suspension setups, and engine parts at our Rawalpindi warehouse. Message us on WhatsApp and our specialists will verify immediate availability and price.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+            <button
+              type="button"
+              onClick={() => openPartInquiry('Kabli Engine or Gearbox')}
+              className="px-5 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl text-xs font-bold shadow-md transition-all active:scale-95"
+            >
+              Inquire Kabli Part
+            </button>
+            <button
+              type="button"
+              onClick={() => openPartInquiry('Brand New Spare Part')}
+              className="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl text-xs font-bold shadow-md transition-all active:scale-95 flex items-center space-x-1.5"
+            >
+              <MessageCircle className="w-4 h-4 fill-white" />
+              <span>WhatsApp Helpline</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Japanese Kabli Parts Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="flex items-end justify-between mb-8">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-wider text-purple-600 block">
+              Tested Imports
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+              Japanese Kabli (Qabli) Highlights
+            </h2>
+            <p className="text-xs text-slate-500 mt-1">
+              Low-mileage engines, automatic transmissions, and original Japanese LED assemblies.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => onNavigateToShop('kabli-parts')}
+            className="text-xs sm:text-sm font-bold text-purple-600 hover:text-purple-800 flex items-center space-x-1"
+          >
+            <span>View All Kabli</span>
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {kabliHighlights.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onSelectProduct={onSelectProduct}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Featured Brand New Spare Parts Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="flex items-end justify-between mb-8">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 block">
+              OEM & Japanese Aftermarket
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+              Brand New Spare Parts
+            </h2>
+            <p className="text-xs text-slate-500 mt-1">
+              KYB Shocks, 555 Ball Joints, Kashiyama Ceramic Pads, Denso Iridium Plugs.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => onNavigateToShop('new-spare-parts')}
+            className="text-xs sm:text-sm font-bold text-emerald-600 hover:text-emerald-800 flex items-center space-x-1"
+          >
+            <span>View All New</span>
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {newPartHighlights.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onSelectProduct={onSelectProduct}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Top Picks / All-Round Featured Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-end justify-between mb-8">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-brand-600 block">
-              Top Picks
+              Top Customer Picks
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
-              Popular & Verified Products
+              Popular Mechanical & Maintenance Parts
             </h2>
           </div>
           <button
@@ -321,78 +431,29 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* How WhatsApp Ordering Works Banner */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="bg-gradient-to-br from-brand-900 via-brand-800 to-slate-900 rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-xl">
-          <div className="max-w-2xl space-y-3">
-            <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">
-              Simple 3-Step WhatsApp Ordering
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-black tracking-tight">
-              Order Genuine Car Care Without Hassle
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              No credit card numbers required. Pick your oil bottle or filters, tap the WhatsApp button, and send the auto-generated order message. We confirm stock and dispatch right away.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 pt-8 border-t border-white/10">
-            <div className="space-y-2">
-              <div className="w-8 h-8 rounded-full bg-brand-500 text-white font-bold flex items-center justify-center text-sm shadow-md">
-                1
-              </div>
-              <h4 className="font-bold text-white text-base">Select Your Product</h4>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Choose the correct viscosity (0W-20, 5W-30, etc.) or volume (1L / 4L).
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <div className="w-8 h-8 rounded-full bg-emerald-500 text-white font-bold flex items-center justify-center text-sm shadow-md">
-                2
-              </div>
-              <h4 className="font-bold text-white text-base">Click "WhatsApp Order"</h4>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                A formatted message with your chosen variant, quantity, and PKR price opens automatically.
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <div className="w-8 h-8 rounded-full bg-sky-400 text-slate-900 font-bold flex items-center justify-center text-sm shadow-md">
-                3
-              </div>
-              <h4 className="font-bold text-white text-base">Confirmation & Delivery</h4>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                We confirm rider delivery to your address in Rawalpindi or Islamabad. Pay upon delivery!
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Trust & Guarantee Badges */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="p-6 bg-white rounded-2xl border border-slate-200/90 shadow-2xs flex items-start space-x-4">
-            <div className="p-3 rounded-2xl bg-brand-50 text-brand-600 shrink-0">
-              <ShieldCheck className="w-6 h-6" />
+            <div className="p-3 rounded-2xl bg-purple-50 text-purple-600 shrink-0">
+              <RotateCcw className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="font-bold text-slate-900 text-base">100% Genuine Fluids</h4>
+              <h4 className="font-bold text-slate-900 text-base">Tested Japanese Kabli Stock</h4>
               <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                Directly sourced from authorized distributors. Zero compromise on engine safety or oil seals.
+                Every Kabli engine, transmission, and rack is pre-tested for compression, seals, and clean performance.
               </p>
             </div>
           </div>
 
           <div className="p-6 bg-white rounded-2xl border border-slate-200/90 shadow-2xs flex items-start space-x-4">
             <div className="p-3 rounded-2xl bg-emerald-50 text-emerald-600 shrink-0">
-              <Truck className="w-6 h-6" />
+              <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="font-bold text-slate-900 text-base">Fast Dispatch</h4>
+              <h4 className="font-bold text-slate-900 text-base">Brand New Genuine & OEM</h4>
               <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                Same-day rider delivery within Rawalpindi (Bahria, DHA, Saddar, Chaklala) and Islamabad.
+                Directly sourced from trusted brands like KYB, 555 Japan, Denso, Aisin, and OEM Japanese manufacturers.
               </p>
             </div>
           </div>
@@ -404,7 +465,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             <div>
               <h4 className="font-bold text-slate-900 text-base">5.0 Star Rated Workshop</h4>
               <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                Trusted auto repair & electrical shop opposite Bahria Town Phase 4 Gate, GT Road.
+                Full-service workshop on GT Road Rawalpindi opposite Bahria Town Phase 4 Gate for fitting and diagnostics.
               </p>
             </div>
           </div>

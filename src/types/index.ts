@@ -6,6 +6,8 @@ export interface ProductVariant {
   inStock?: boolean;
 }
 
+export type ProductCondition = 'new' | 'kabli';
+
 export interface Product {
   id: string;
   name: string;
@@ -13,6 +15,7 @@ export interface Product {
   category: string;
   subcategory?: string;
   brand: string;
+  condition: ProductCondition; // 'new' for Brand New, 'kabli' for Genuine Japanese Qabli / Used
   shortDescription: string;
   image?: string;
   variants: ProductVariant[];
@@ -21,6 +24,7 @@ export interface Product {
   featured?: boolean;
   rating?: number;
   reviewsCount?: number;
+  compatibility?: string[]; // Compatible car models (e.g. Corolla, Civic, Alto, Vitz)
 }
 
 export interface CartItem {
@@ -32,20 +36,24 @@ export interface CartItem {
   quantity: number;
   brand: string;
   category: string;
+  condition?: ProductCondition;
   image?: string;
 }
 
 export type CategoryKey = 
   | 'all'
+  | 'kabli-parts'
+  | 'new-spare-parts'
+  | 'engine-mechanical'
+  | 'suspension-brakes'
+  | 'electrical-lights'
   | 'engine-oils'
-  | 'coolants'
-  | 'filters'
-  | 'lubricants-sprays'
-  | 'consumables';
+  | 'coolants-sprays';
 
 export interface FilterState {
   searchQuery: string;
   category: CategoryKey;
+  conditionFilter: 'all' | 'new' | 'kabli';
   selectedBrands: string[];
   minPrice: number;
   maxPrice: number;

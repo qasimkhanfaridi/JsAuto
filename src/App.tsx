@@ -22,9 +22,10 @@ export const AppContent: React.FC = () => {
   const [filters, setFilters] = useState<FilterState>({
     searchQuery: '',
     category: 'all',
+    conditionFilter: 'all',
     selectedBrands: [],
     minPrice: 0,
-    maxPrice: 20000,
+    maxPrice: 350000,
     inStockOnly: false,
     selectedTag: null,
     sortBy: 'featured',

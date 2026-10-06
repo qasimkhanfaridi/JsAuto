@@ -95,7 +95,7 @@ export const Header: React.FC<HeaderProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search 100+ oils, coolants, filters, WD-40, brands..."
+              placeholder="Search Kabli engines, gearboxes, suspension, shocks, oils, models..."
               className="w-full bg-slate-100 hover:bg-slate-100/80 focus:bg-white text-xs sm:text-sm pl-10 pr-10 py-2.5 rounded-2xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all text-slate-800 placeholder-slate-400"
             />
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -160,7 +160,7 @@ export const Header: React.FC<HeaderProps> = ({
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search oils, filters, coolants, WD-40..."
+            placeholder="Search Kabli engines, suspension, oils, models..."
             className="w-full bg-slate-100 text-xs pl-9 pr-8 py-2 rounded-xl border border-slate-200 focus:outline-hidden focus:border-brand-500"
           />
           <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -200,42 +200,49 @@ export const Header: React.FC<HeaderProps> = ({
                   : 'text-slate-600 hover:text-brand-600 hover:bg-white'
               }`}
             >
-              All Products
+              All Parts
+            </button>
+            <button
+              type="button"
+              onClick={() => handleNavClick('shop', 'kabli-parts')}
+              className="px-3 py-1.5 rounded-lg text-amber-700 bg-amber-50/70 hover:bg-amber-100 border border-amber-200/60 font-bold transition-colors"
+            >
+              🇯🇵 Kabli (Qabli) Parts
+            </button>
+            <button
+              type="button"
+              onClick={() => handleNavClick('shop', 'new-spare-parts')}
+              className="px-3 py-1.5 rounded-lg text-emerald-700 bg-emerald-50/70 hover:bg-emerald-100 border border-emerald-200/60 font-bold transition-colors"
+            >
+              ✨ Brand New Parts
+            </button>
+            <button
+              type="button"
+              onClick={() => handleNavClick('shop', 'engine-mechanical')}
+              className="px-3 py-1.5 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-white transition-colors"
+            >
+              Engines & Gearboxes
+            </button>
+            <button
+              type="button"
+              onClick={() => handleNavClick('shop', 'suspension-brakes')}
+              className="px-3 py-1.5 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-white transition-colors"
+            >
+              Suspension & Brakes
+            </button>
+            <button
+              type="button"
+              onClick={() => handleNavClick('shop', 'electrical-lights')}
+              className="px-3 py-1.5 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-white transition-colors"
+            >
+              Lights & Electrical
             </button>
             <button
               type="button"
               onClick={() => handleNavClick('shop', 'engine-oils')}
               className="px-3 py-1.5 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-white transition-colors"
             >
-              Engine Oils
-            </button>
-            <button
-              type="button"
-              onClick={() => handleNavClick('shop', 'coolants')}
-              className="px-3 py-1.5 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-white transition-colors"
-            >
-              Coolants
-            </button>
-            <button
-              type="button"
-              onClick={() => handleNavClick('shop', 'filters')}
-              className="px-3 py-1.5 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-white transition-colors"
-            >
-              Filters
-            </button>
-            <button
-              type="button"
-              onClick={() => handleNavClick('shop', 'lubricants-sprays')}
-              className="px-3 py-1.5 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-white transition-colors"
-            >
-              WD-40 & Sprays
-            </button>
-            <button
-              type="button"
-              onClick={() => handleNavClick('shop', 'consumables')}
-              className="px-3 py-1.5 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-white transition-colors"
-            >
-              Wipers & Consumables
+              Oils & Fluids
             </button>
 
             {/* Coming Soon Category: Auto Decorations */}
@@ -281,42 +288,49 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => handleNavClick('shop', 'all')}
             className="w-full text-left py-2 px-3 rounded-lg text-slate-700 hover:bg-slate-100"
           >
-            All Products (100 Catalog Items)
+            All Spare Parts & Fluids
+          </button>
+          <button
+            type="button"
+            onClick={() => handleNavClick('shop', 'kabli-parts')}
+            className="w-full text-left py-2 px-3 rounded-lg text-amber-800 bg-amber-50 font-bold"
+          >
+            🇯🇵 Japanese Kabli (Qabli) Parts
+          </button>
+          <button
+            type="button"
+            onClick={() => handleNavClick('shop', 'new-spare-parts')}
+            className="w-full text-left py-2 px-3 rounded-lg text-emerald-800 bg-emerald-50 font-bold"
+          >
+            ✨ Brand New Spare Parts
+          </button>
+          <button
+            type="button"
+            onClick={() => handleNavClick('shop', 'engine-mechanical')}
+            className="w-full text-left py-2 px-3 rounded-lg text-slate-700 hover:bg-slate-100"
+          >
+            Engines & Gearboxes
+          </button>
+          <button
+            type="button"
+            onClick={() => handleNavClick('shop', 'suspension-brakes')}
+            className="w-full text-left py-2 px-3 rounded-lg text-slate-700 hover:bg-slate-100"
+          >
+            Suspension, Steering & Brakes
+          </button>
+          <button
+            type="button"
+            onClick={() => handleNavClick('shop', 'electrical-lights')}
+            className="w-full text-left py-2 px-3 rounded-lg text-slate-700 hover:bg-slate-100"
+          >
+            LED Lights, Auto Electrical & AC
           </button>
           <button
             type="button"
             onClick={() => handleNavClick('shop', 'engine-oils')}
             className="w-full text-left py-2 px-3 rounded-lg text-slate-700 hover:bg-slate-100"
           >
-            Engine Oils
-          </button>
-          <button
-            type="button"
-            onClick={() => handleNavClick('shop', 'coolants')}
-            className="w-full text-left py-2 px-3 rounded-lg text-slate-700 hover:bg-slate-100"
-          >
-            Engine Coolants
-          </button>
-          <button
-            type="button"
-            onClick={() => handleNavClick('shop', 'filters')}
-            className="w-full text-left py-2 px-3 rounded-lg text-slate-700 hover:bg-slate-100"
-          >
-            Air / Oil / Fuel Filters
-          </button>
-          <button
-            type="button"
-            onClick={() => handleNavClick('shop', 'lubricants-sprays')}
-            className="w-full text-left py-2 px-3 rounded-lg text-slate-700 hover:bg-slate-100"
-          >
-            WD-40, Greases & Sprays
-          </button>
-          <button
-            type="button"
-            onClick={() => handleNavClick('shop', 'consumables')}
-            className="w-full text-left py-2 px-3 rounded-lg text-slate-700 hover:bg-slate-100"
-          >
-            Wiper Blades & Consumables
+            Engine Oils & Fluids
           </button>
           <div className="py-2 px-3 rounded-lg text-slate-400 flex items-center justify-between">
             <span>Auto Decorations</span>

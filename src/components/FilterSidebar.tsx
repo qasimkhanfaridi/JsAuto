@@ -43,9 +43,10 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
     setFilters({
       searchQuery: '',
       category: 'all',
+      conditionFilter: 'all',
       selectedBrands: [],
       minPrice: 0,
-      maxPrice: 20000,
+      maxPrice: 350000,
       inStockOnly: false,
       selectedTag: null,
       sortBy: 'featured',
@@ -54,9 +55,10 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
 
   const hasActiveFilters =
     filters.category !== 'all' ||
+    filters.conditionFilter !== 'all' ||
     filters.selectedBrands.length > 0 ||
     filters.minPrice > 0 ||
-    filters.maxPrice < 20000 ||
+    filters.maxPrice < 350000 ||
     filters.inStockOnly ||
     filters.selectedTag !== null ||
     filters.searchQuery !== '';
@@ -66,7 +68,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
       {/* Active Count & Reset */}
       <div className="flex items-center justify-between pb-3 border-b border-slate-200">
         <div>
-          <span className="text-xs font-bold text-slate-900 block">Filter Products</span>
+          <span className="text-xs font-bold text-slate-900 block">Filter Inventory</span>
           <span className="text-[11px] text-slate-500">
             Showing {filteredProductsCount} of {totalProductsCount}
           </span>
@@ -81,6 +83,48 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
             <span>Reset</span>
           </button>
         )}
+      </div>
+
+      {/* Part Condition Filter: Brand New vs Japanese Kabli */}
+      <div className="space-y-1.5">
+        <label className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
+          Part Condition
+        </label>
+        <div className="grid grid-cols-3 gap-1 bg-slate-100 p-1 rounded-xl">
+          <button
+            type="button"
+            onClick={() => setFilters((p) => ({ ...p, conditionFilter: 'all' }))}
+            className={`py-1.5 px-1 rounded-lg text-[11px] font-bold transition-all text-center ${
+              filters.conditionFilter === 'all'
+                ? 'bg-white text-slate-900 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            All Parts
+          </button>
+          <button
+            type="button"
+            onClick={() => setFilters((p) => ({ ...p, conditionFilter: 'new' }))}
+            className={`py-1.5 px-1 rounded-lg text-[11px] font-bold transition-all text-center ${
+              filters.conditionFilter === 'new'
+                ? 'bg-emerald-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-emerald-700'
+            }`}
+          >
+            Brand New
+          </button>
+          <button
+            type="button"
+            onClick={() => setFilters((p) => ({ ...p, conditionFilter: 'kabli' }))}
+            className={`py-1.5 px-1 rounded-lg text-[11px] font-bold transition-all text-center ${
+              filters.conditionFilter === 'kabli'
+                ? 'bg-purple-600 text-white shadow-xs'
+                : 'text-purple-700 hover:bg-purple-100'
+            }`}
+          >
+            Kabli / Qabli
+          </button>
+        </div>
       </div>
 
       {/* Categories */}

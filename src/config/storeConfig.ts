@@ -1,7 +1,7 @@
 export const STORE_CONFIG = {
   name: "JS Auto",
   tagline: "ALL CAR SOLUTIONS UNDER ONE ROOF",
-  description: "Specialized in 100% genuine engine oils, radiator coolants, genuine filters, WD-40 sprays, auto electricals, and maintenance consumables in Rawalpindi & Islamabad.",
+  description: "Specialized in Brand New OEM & Imported Japanese Kabli (Qabli) Spare Parts, Engine Assemblies, Transmissions, Suspension, Auto Electricals, and 100% Genuine Oils in Rawalpindi & Islamabad.",
   // Primary WhatsApp number (international format without + or spaces for wa.me URL)
   whatsappNumber: "923365804080",
   whatsappSecondaryNumber: "923315804888",
@@ -14,30 +14,32 @@ export const STORE_CONFIG = {
   hours: "Open Daily · Closes 9:00 PM",
   currency: "PKR",
   currencySymbol: "Rs.",
-  deliveryNote: "Fast delivery across Rawalpindi & Islamabad. Cash on delivery & online bank transfer available.",
-  announcement: "⚡ JS AUTO — ALL CAR SOLUTIONS UNDER ONE ROOF • 0336-5804080 / 0331-5804888 • Instant WhatsApp Ordering",
+  deliveryNote: "Fast dispatch across Rawalpindi & Islamabad. Nationwide cargo available for engines and heavy Kabli parts.",
+  announcement: "⚡ JS AUTO — Brand New & Japanese Kabli (Qabli) Spare Parts • Engine Assemblies, Suspension, Electricals & Oils • 0336-5804080",
   services: [
-    "General Mechanic",
-    "Engine Repair",
-    "Brake Service",
-    "Oil Change & Lubrication",
-    "Diagnostic Scan",
-    "LED Lights & Accessories",
-    "Suspension",
-    "Electrical Work",
-    "Car AC Service"
+    "Brand New Spare Parts",
+    "Japanese Kabli (Qabli) Parts",
+    "Engine Assemblies & Gearboxes",
+    "Suspension & Steering Racks",
+    "Brake Discs & Calipers",
+    "Electrical Work & Diagnostics",
+    "AC Compressors & Radiators",
+    "LED Lights & Body Cuts",
+    "Oil Change & Lubrication"
   ],
   categories: [
-    { id: "all", name: "All Products", count: 100 },
-    { id: "engine-oils", name: "Engine Oils", icon: "Droplet", count: 32 },
-    { id: "coolants", name: "Engine Coolants", icon: "ThermometerSnowflake", count: 16 },
-    { id: "filters", name: "Filters (Air/Oil/Fuel)", icon: "Filter", count: 26 },
-    { id: "lubricants-sprays", name: "Sprays & WD-40", icon: "Sparkles", count: 16 },
-    { id: "consumables", name: "Wipers & Consumables", icon: "Wrench", count: 10 },
+    { id: "all", name: "All Inventory", icon: "Boxes", count: 110 },
+    { id: "kabli-parts", name: "Japanese Kabli (Qabli) Parts", icon: "RotateCcw", count: 35 },
+    { id: "new-spare-parts", name: "Brand New Spare Parts", icon: "Sparkles", count: 35 },
+    { id: "engine-mechanical", name: "Engine & Transmission", icon: "Wrench", count: 20 },
+    { id: "suspension-brakes", name: "Suspension & Brakes", icon: "Shield", count: 18 },
+    { id: "electrical-lights", name: "Lights, Electrical & AC", icon: "Zap", count: 16 },
+    { id: "engine-oils", name: "Engine Oils & Lubricants", icon: "Droplet", count: 20 },
+    { id: "coolants-sprays", name: "Coolants & Sprays (WD-40)", icon: "Flame", count: 15 },
   ],
   comingSoonCategory: {
     name: "Auto Decorations",
-    badge: "Coming Soon (Phase 2)",
-    description: "Interior LEDs, body trims, spoilers, and ambient lighting launching soon!"
+    badge: "Phase 2 Coming Soon",
+    description: "Interior ambient lighting, spoilers, carbon trims & body kits launching soon!"
   }
 };
